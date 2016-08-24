@@ -30,6 +30,7 @@
      position: absolute;
      z-index: 1;
      box-shadow: 0 0 1px rgba(0,0,0,0.01);
+     transition: all 0.6s;
    }
   .photo .side{
      width: 100%;
@@ -93,6 +94,34 @@
   .photo_back .photo-wrap{
     transform: rotateY(180deg);
   }
+  .nav{
+    width:20%;
+    height:30px;
+    line-height: 30px;
+    position: absolute;
+    left:40%;
+    bottom:20px;
+    z-index:999;
+  }
+  .nav .i{
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+    cursor: pointer;
+    background-color: #ffaaaa;
+    text-align: center;
+    border-radius: 50%;
+    transform: scale(0.48);
+    transition: all 0.5s;
+  }
+  .nav .i_current{
+    transform: scale(1);
+    background-color: #ffaa00;
+  }
+  .nav .i_back{
+    transform:rotateY(-180deg);
+    background-color: #bfff3f;
+  }
   </style>
 </head>
 <body onselectstart="return false;"><!--防止页面文字被选中-->
@@ -129,6 +158,7 @@
   function addPhotos(){
     var template = g('#wrap').innerHTML;
     var html=[];
+    var nav=[];
     console.log("mydata: "+mydata);
     for(var s in mydata){
       var _html = template
@@ -137,7 +167,9 @@
                       .replace('{{caption}}',mydata[s].caption)
                       .replace('{{desc}}',mydata[s].desc);
       html.push(_html);
+      nav.push('<span id="nav_'+s+'" onclick="turn(g(\'#photo_'+s+'\'))" class="i">&nbsp;</span>');
     }
+    html.push('<div class="nav">'+nav.join('')+'</div>');
     g('#wrap').innerHTML = html.join('');
   //  rsort(1);
   rsort(random([-1,data.length-1])); //生成0-7
@@ -168,6 +200,13 @@
     var photos=[];//得到一个真正的数组
     for(var s=0;s<_photo.length;s++){
       _photo[s].className = _photo[s].className.replace(/\s*photo_center\s*/,' ');
+      _photo[s].className = _photo[s].className.replace(/\s*photo_front\s*/,' ');
+      _photo[s].className = _photo[s].className.replace(/\s*photo_back\s*/,' ');
+      _photo[s].className += ' photo_front';
+      _photo[s].style.left='';
+      _photo[s].style.top='';
+      _photo[s].style.transform='rotate(360deg)';
+
       photos.push(_photo[s]);
     }
     var photo_center = g('#photo_'+n);
@@ -188,16 +227,31 @@
       photo.style.top= random(ranges.right.y)+'px';
       photo.style['transform']='rotate('+random([-150,150])+'deg)';
     }
+
+    var navs = g('.i');
+    for(var s=0;s<navs.length;s++){
+      navs[s].className = navs[s].className.replace(/\s*i_current\s*/,' ');
+      navs[s].className = navs[s].className.replace(/\s*i_back\s*/,' ');
+    }
+    g('#nav_'+n).className += ' i_current ';
     console.log(photos.length);
   }
 
   function turn(elem){
     var str = elem.className;
     var pattern = /photo_front/;
+    var n= elem.id.split('_')[1];
+
+    if(!/photo_center/.test(str)){
+      return rsort(n);
+    }
+
     if(pattern.test(str)){
       elem.className = str.replace(pattern,"photo_back");
+      g('#nav_'+n).className += 'i_back';
     }else{
       elem.className = str.replace(/photo_back/,"photo_front");
+      g('#nav_'+n).className = g('#nav_'+n).className.replace(/\s*i_back\s*/,' ');
     }
   }
   </script>

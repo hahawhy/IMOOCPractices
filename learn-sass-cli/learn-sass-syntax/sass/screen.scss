@@ -1,0 +1,78 @@
+@charset "UTF-8";
+/* Welcome to Compass.
+ * In this file you should write your main styles. (or centralize your imports)
+ * Import this file using the following HTML or equivalent:
+ * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+/**
+*CONTENTS
+*
+*SETTINGS
+*variables...........................变量集中存储文件
+*mixin..............................mixin集中存储文件
+*TOOLS
+*
+*COMPONENTS
+*reset..........................Compass内置浏览器重置样式文件
+*BUSINESS
+*screen.scss..........................针对当前站点主页的样式修饰
+*BASE
+*
+*/
+@import "variables", "mixin";
+//@import "normalize";
+@import "compass/css3";
+@import "compass/support";//其实不用引入，css3引入时已经引入了这个support模块
+
+//$supported-browsers:chrome,firefox;
+//$browser-minimum-versions:("ie":"8");
+div{
+  //appearance:button;
+  @include appearance("button");
+}
+
+.test-inline-block{
+  @include inline-block();
+}
+//@debug browsers();
+ // main title
+.headline{
+  font-family: $headline-ff;
+}
+/*the body style*/
+.main-sec{
+  font-family: $main-sec-ff;
+  @at-root{
+    .main-sec-headline{
+      font:{
+        family:$main-sec-ff;
+        size:16px;
+      }
+    }
+
+    .main-sec-detail{
+      font-size: 12px;
+    }
+  }
+}
+
+p{
+  color: hsl(270,100%,50%);
+}
+
+.webdemo-sec {
+  @include col-sm(50);
+  @include box-shadow(1px 1px 3px 2px #cfcecf);
+  //box-shadow: 1px 1px 3px 2px #cfcecf;
+  &:hover{
+    background-color: #f5f5f5;
+  }
+}
+
+%error{
+  color: #f00;
+}
+
+.serious-error{
+  @extend %error;
+  border:1px #f00;
+}

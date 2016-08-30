@@ -1,0 +1,88 @@
+@charset "UTF-8";
+/* Welcome to Compass.
+ * In this file you should write your main styles. (or centralize your imports)
+ * Import this file using the following HTML or equivalent:
+ * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+/**
+*CONTENTS
+*
+*SETTINGS
+*variables...........................变量集中存储文件
+*mixin..............................mixin集中存储文件
+*TOOLS
+*
+*COMPONENTS
+*reset..........................Compass内置浏览器重置样式文件
+*BUSINESS
+*screen.scss..........................针对当前站点主页的样式修饰
+*BASE
+*
+*/
+/* line 28, ../sass/screen.scss */
+div {
+  -moz-appearance: button;
+  -webkit-appearance: button;
+}
+
+/* line 33, ../sass/screen.scss */
+.test-inline-block {
+  display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
+  *zoom: 1;
+  *display: inline;
+}
+
+/* line 38, ../sass/screen.scss */
+.headline {
+  font-family: Braggadocio, Arial, Verdana, Helvetica, sans-serif;
+}
+
+/*the body style*/
+/* line 42, ../sass/screen.scss */
+.main-sec {
+  font-family: Arial, Verdana, Helvetica, sans-serif;
+}
+/* line 45, ../sass/screen.scss */
+.main-sec-headline {
+  font-family: Arial, Verdana, Helvetica, sans-serif;
+  font-size: 16px;
+}
+
+/* line 52, ../sass/screen.scss */
+.main-sec-detail {
+  font-size: 12px;
+}
+
+/* line 58, ../sass/screen.scss */
+p {
+  color: #8000ff;
+}
+
+/* line 62, ../sass/screen.scss */
+.webdemo-sec {
+  -moz-box-shadow: 1px 1px 3px 2px #cfcecf;
+  -webkit-box-shadow: 1px 1px 3px 2px #cfcecf;
+  box-shadow: 1px 1px 3px 2px #cfcecf;
+}
+@media (min-width: 768px) {
+  /* line 62, ../sass/screen.scss */
+  .webdemo-sec {
+    width: 50%;
+    float: left;
+  }
+}
+/* line 66, ../sass/screen.scss */
+.webdemo-sec:hover {
+  background-color: #f5f5f5;
+}
+
+/* line 71, ../sass/screen.scss */
+.serious-error {
+  color: #f00;
+}
+
+/* line 75, ../sass/screen.scss */
+.serious-error {
+  border: 1px #f00;
+}
